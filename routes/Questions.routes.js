@@ -39,4 +39,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+//edit a question by id
+router.put("/:id", async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const question = await Questions.findByIdAndUpdate(_id, req.body, {
+      new: true,
+    });
+    if (!question) {
+      return res.status(404).send();
+    }
+    res.send(question);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 export default router;

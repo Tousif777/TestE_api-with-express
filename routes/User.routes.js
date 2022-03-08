@@ -76,16 +76,19 @@ router.put("/:id", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email, password });
+    const user = await User.findOne({ email });
     if (!user) {
-      return res
-        .status(404)
-        .send(`User with email ${email} and password ${password} not found!`);
+      return res.status(404).send();
+    }
+    if (user.password !== password) {
+      return res.status(404).send();
+    }
+    if (user.email !== email) {
+      return res.status(404).send();
     }
     res.send(user);
   } catch (error) {
     res.status(500).send(error);
   }
 });
-
 export default router;
