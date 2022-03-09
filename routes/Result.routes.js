@@ -42,4 +42,18 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+//get a result by email
+router.get("/:email", async (req, res) => {
+  const email = req.params.email;
+  try {
+    const result = await Result.findOne({ email });
+    if (!result) {
+      return res.status(404).send();
+    }
+    res.send(result);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 export default router;

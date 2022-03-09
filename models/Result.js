@@ -7,12 +7,12 @@ const resultSchema = new Schema({
     type: String,
     required: true,
   },
-  score: {
-    type: Number,
+  email: {
+    type: String,
     required: true,
   },
-  date: {
-    type: Date,
+  score: {
+    type: Number,
     required: true,
   },
 });
